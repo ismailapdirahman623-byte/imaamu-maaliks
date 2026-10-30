@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="so">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maamulka Ardayda</title>
+
+<style>
+:root {
+  --primary: #1746a2;
+  --dark: #102b50;
+  --bg: #f3f6fc;
+  --white: #ffffff;
+  --green: #16845b;
+  --red: #c73535;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: var(--bg);
+  color: #202b3c;
+}
+header {
+  background: linear-gradient(120deg, var(--dark), var(--primary));
+  color: white;
+  padding: 25px 5%;
+}
+header h1 { margin: 0 0 8px; }
+header p { margin: 0; opacity: .9; }
+.container { max-width: 1200px; margin: auto; padding: 24px; }
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(160px,1fr));
+  gap: 15px;
+  margin-bottom: 22px;
+}
+.stat, .panel {
+  background: var(--white);
+  padding: 20px;
+  border-radius: 13px;
+  box-shadow: 0 3px 14px #172d4b0d;
+}
+.stat h3 { margin: 0 0 12px; font-size: 14px; color: #627087; }
+.stat strong { font-size: 28px; color: var(--primary); }
+.panel { margin-bottom: 22px; }
+.panel h2 { margin-top: 0; font-size: 20px; }
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+  gap: 15px;
+}
+label { display: block; font-size: 14px; font-weight: bold; margin-bottom: 7px; }
+input, select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #d4dce9;
+  border-radius: 8px;
+  background: white;
+  font-size: 15px;
+}
+input:focus, select:focus {
+  outline: 2px solid #a9c4ff;
+  border-color: var(--primary);
+}
+button {
+  border: 0;
+  padding: 11px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 14px;
+}
+.primary { background: var(--primary); color: white; }
+.success { background: var(--green); color: white; }
+.danger { background: var(--red); color: white; }
+.secondary { background: #e8eef9; color: var(--dark); }
+.actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
+.search-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; min-width: 760px; }
+th, td {
+  text-align: left;
+  padding: 13px 10px;
+  border-bottom: 1px solid #e7ebf2;
+}
+th { background: #f1f5fc; font-size: 13px; }
+td { font-size: 14px; }
+.badge {
+  display: inline-block;
+  padding: 5px 9px;
+  background: #e8efff;
+  color: #1746a2;
+  border-radius: 20px;
+  font-size: 12px;
+}
+.empty { padding: 30px; text-align: center; color: #738096; }
+footer { text-align: center; padding: 20px; color: #788398; }
+#message { margin-top: 12px; font-size: 14px; }
+@media(max-width:600px) {
+  .container { padding: 12px; }
+  header { padding: 22px 16px; }
+  .search-row { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+
+<body>
+<header>
+  <h1>🎓 Maamulka Ardayda</h1>
+  <p>Nidaamka diiwaangelinta iyo maamulka ardayda dugsiga</p>
+</header>
+
+<main class="container">
+
+  <section class="stats">
+    <div class="stat">
+      <h3>Wadarta Ardayda</h3>
+      <strong id="total">0</strong>
+    </div>
+    <div class="stat">
+      <h3>Wiilasha</h3>
+      <strong id="boys">0</strong>
+    </div>
+    <div class="stat">
+      <h3>Gabdhaha</h3>
+      <strong id="girls">0</strong>
+    </div>
+    <div class="stat">
+      <h3>Fasallada</h3>
+      <strong>6</strong>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2 id="formTitle">➕ Diiwaangeli Arday Cusub</h2>
+
+    <form id="studentForm">
+      <div class="form-grid">
+        <div>
+          <label for="name">Magaca Ardayga *</label>
+          <input id="name" required maxlength="100"
+                 placeholder="Geli magaca ardayga">
+        </div>
+
+        <div>
+          <label for="gender">Jinsiga *</label>
+          <select id="gender" required>
+            <option value="">Dooro jinsiga</option>
+            <option value="Wiil">Wiil</option>
+            <option value="Gabar">Gabar</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="className">Fasalka *</label>
+          <select id="className" required>
+            <option value="">Dooro fasalka</option>
+            <option>Carruurta Galinka Hore</option>
+            <option>Carruurta Galinka Dambe</option>
+            <option>Hablaha Galinka Hore</option>
+            <option>Hablaha Galinka Dambe</option>
+            <option>Inamada Galinka Hore</option>
+            <option>Inamada Galinka Dambe</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="phone">Telefoonka Waalidka</label>
+          <input id="phone" type="tel" maxlength="25"
+                 placeholder="Tusaale: 063XXXXXXX">
+        </div>
+
+        <div>
+          <label for="guardian">Magaca Waalidka</label>
+          <input id="guardian" maxlength="100"
+                 placeholder="Magaca waalidka">
+        </div>
+
+        <div>
+          <label for="date">Taariikhda Diiwaangelinta</label>
+          <input id="date" type="date" required>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button type="submit" class="primary" id="saveBtn">
+          Diiwaangeli Ardayga
+        </button>
+        <button type="button" class="secondary" id="cancelBtn"
+                hidden onClick="resetForm()">
+          Jooji Wax-ka-beddelka
+        </button>
+      </div>
+      <p id="message" role="status" aria-live="polite"></p>
+    </form>
+  </section>
+
+  <section class="panel">
+    <h2>📋 Liiska Ardayda</h2>
+
+    <div class="search-row">
+      <input id="search" placeholder="🔎 Raadi magaca, lambarka ama waalidka...">
+      <select id="filterClass">
+        <option value="">Dhammaan Fasallada</option>
+        <option>Carruurta Galinka Hore</option>
+        <option>Carruurta Galinka Dambe</option>
+        <option>Hablaha Galinka Hore</option>
+        <option>Hablaha Galinka Dambe</option>
+        <option>Inamada Galinka Hore</option>
+        <option>Inamada Galinka Dambe</option>
+      </select>
+    </div>
+
+    <div class="actions" style="margin:0 0 16px">
+      <button class="success" id="exportBtn">Soo Dejiso Excel (CSV)</button>
+      <button class="secondary" onclick="window.print()">Daabac Liiska</button>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Lambarka</th>
+            <th>Magaca Ardayga</th>
+            <th>Jinsiga</th>
+            <th>Fasalka</th>
+            <th>Waalidka</th>
+            <th>Telefoonka</th>
+            <th>Taariikhda</th>
+            <th>Hawlaha</th>
+          </tr>
+        </thead>
+        <tbody id="studentList"></tbody>
+      </table>
+      <div id="empty" class="empty">
+        Weli arday lama diiwaangelin.
+      </div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>📊 Tirada Ardayda Fasallada</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Fasalka</th><th>Wiilasha</th><th>Gabdhaha</th><th>Wadarta</th></tr>
+        </thead>
+        <tbody id="classStats"></tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+<footer>Maamulka Ardayda © <span id="year"></span></footer>
+
+<script>
+"use strict";
+
+const STORAGE_KEY = "imaamuMaalikStudentsV1";
+
+const classes = [
+  "Carruurta Galinka Hore",
+  "Carruurta Galinka Dambe",
+  "Hablaha Galinka Hore",
+  "Hablaha Galinka Dambe",
+  "Inamada Galinka Hore",
+  "Inamada Galinka Dambe"
+];
+
+const $ = id => document.getElementById(id);
+
+let students = [];
+let editingId = null;
+
+try {
+  const saved = localStorage.getItem(STORAGE_KEY);
+  students = saved ? JSON.parse(saved) : [];
+  if (!Array.isArray(students)) students = [];
+} catch (error) {
+  students = [];
+  alert("Xogta hore lama akhrin karin. Fadlan hubi browser-ka.");
+}
+
+$("date").value = new Date().toLocaleDateString("en-CA");
+$("year").textContent = new Date().getFullYear();
+
+function saveData() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(students));
+    return true;
+  } catch (error) {
+    alert("Xogta lama kaydin. Hubi booska browser-ka.");
+    return false;
+  }
+}
+
+function escapeHTML(value) {
+  return String(value ?? "").replace(/[&<>"']/g, char => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  })[char]);
+}
+
+function newId() {
+  return "ARD-" + Date.now().toString(36).toUpperCase()
+    + "-" + Math.random().toString(36).slice(2, 6).toUpperCase();
+}
+
+$("studentForm").addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  const name = $("name").value.trim();
+  const gender = $("gender").value;
+  const className = $("className").value;
+  const phone = $("phone").value.trim();
+  const guardian = $("guardian").value.trim();
+  const date = $("date").value;
+
+  if (!name || !gender || !classes.includes(className) || !date) {
+    $("message").textContent = "Fadlan buuxi meelaha khasabka ah.";
+    return;
+  }
+
+  const previous = editingId
+    ? students.find(student => student.id === editingId)
+    : null;
+
+  const record = {
+    id: previous ? previous.id : newId(),
+    name, gender, className, phone, guardian, date
+  };
+
+  if (previous) {
+    students = students.map(student =>
+      student.id === editingId ? record : student
+    );
+  } else {
+    students.push(record);
+  }
+
+  if (!saveData()) return;
+
+  $("message").textContent = previous
+    ? "Xogta ardayga waa la cusboonaysiiyey."
+    : "Ardayga si guul leh ayaa loo diiwaangeliyey.";
+
+  resetForm();
+  render();
+});
+
+function resetForm() {
+  editingId = null;
+  $("studentForm").reset();
+  $("date").value = new Date().toLocaleDateString("en-CA");
+  $("formTitle").textContent = "➕ Diiwaangeli Arday Cusub";
+  $("saveBtn").textContent = "Diiwaangeli Ardayga";
+  $("cancelBtn").hidden = true;
+}
+
+function editStudent(id) {
+  const student = students.find(item => item.id === id);
+  if (!student) return;
+
+  editingId = id;
+  $("name").value = student.name;
+  $("gender").value = student.gender;
+  $("className").value = student.className;
+  $("phone").value = student.phone;
+  $("guardian").value = student.guardian;
+  $("date").value = student.date;
+
+  $("formTitle").textContent = "✏️ Wax ka beddel xogta ardayga";
+  $("saveBtn").textContent = "Kaydi Isbeddelka";
+  $("cancelBtn").hidden = false;
+  $("message").textContent = "";
+  $("name").focus();
+  window.scrollTo({top: 0, behavior: "smooth"});
+}
+
+function deleteStudent(id) {
+  const student = students.find(item => item.id === id);
+  if (!student) return;
+
+  if (!confirm("Ma hubtaa inaad tirtirayso ardayga " +
+               student.name + "?")) return;
+
+  const previous = students;
+  students = students.filter(item => item.id !== id);
+
+  if (!saveData()) {
+    students = previous;
+    return;
+  }
+
+  if (editingId === id) resetForm();
+  $("message").textContent = "Ardayga waa la tirtiray.";
+  render();
+}
+
+function render() {
+  const query = $("search").value.trim().toLowerCase();
+  const selectedClass = $("filterClass").value;
+
+  const filtered = students.filter(student => {
+    const searchable = [
+      student.id, student.name, student.guardian,
+      student.phone, student.className, student.gender
+    ].join(" ").toLowerCase();
+
+    return searchable.includes(query) &&
+      (!selectedClass || student.className === selectedClass);
+  });
+
+  $("total").textContent = students.length;
+  $("boys").textContent =
+    students.filter(s => s.gender === "Wiil").length;
+  $("girls").textContent =
+    students.filter(s => s.gender === "Gabar").length;
+
+  $("studentList").innerHTML = filtered.map(student => `
+    <tr>
+      <td>${escapeHTML(student.id)}</td>
+      <td>${escapeHTML(student.name)}</td>
+      <td>${escapeHTML(student.gender)}</td>
+      <td><span class="badge">${escapeHTML(student.className)}</span></td>
+      <td>${escapeHTML(student.guardian || "-")}</td>
+      <td>${escapeHTML(student.phone || "-")}</td>
+      <td>${escapeHTML(student.date)}</td>
+      <td>
+        <button class="secondary" data-edit="${escapeHTML(student.id)}">
+          Wax ka beddel
+        </button>
+        <button class="danger" data-delete="${escapeHTML(student.id)}">
+          Tirtir
+        </button>
+      </td>
+    </tr>
+  `).join("");
+
+  $("empty").hidden = filtered.length > 0;
+
+  $("classStats").innerHTML = classes.map(className => {
+    const group = students.filter(s => s.className === className);
+    const boys = group.filter(s => s.gender === "Wiil").length;
+    const girls = group.filter(s => s.gender === "Gabar").length;
+
+    return `<tr>
+      <td>${escapeHTML(className)}</td>
+      <td>${boys}</td>
+      <td>${girls}</td>
+      <td><strong>${group.length}</strong></td>
+    </tr>`;
+  }).join("");
+}
+
+$("studentList").addEventListener("click", event => {
+  const editButton = event.target.closest("[data-edit]");
+  const deleteButton = event.target.closest("[data-delete]");
+
+  if (editButton) editStudent(editButton.dataset.edit);
+  if (deleteButton) deleteStudent(deleteButton.dataset.delete);
+});
+
+$("search").addEventListener("input", render);
+$("filterClass").addEventListener("change", render);
+
+$("exportBtn").addEventListener("click", () => {
+  const headers = [
+    "Lambarka", "Magaca", "Jinsiga", "Fasalka",
+    "Waalidka", "Telefoonka", "Taariikhda"
+  ];
+
+  const rows = students.map(s => [
+    s.id, s.name, s.gender, s.className,
+    s.guardian, s.phone, s.date
+  ]);
+
+  const csvCell = value =>
+    '"' + String(value ?? "").replace(/"/g, '""') + '"';
+
+  const csv = "\uFEFF" + [headers, ...rows]
+    .map(row => row.map(csvCell).join(",")).join("\r\n");
+
+  const blob = new Blob([csv], {
+    type: "text/csv;charset=utf-8;"
+  });
+
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "liiska-ardayda.csv";
+  link.click();
+  URL.revokeObjectURL(url);
+});
+
+render();
+</script>
+</body>
+</html>
